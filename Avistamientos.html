@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head> 
+        <meta charset="UTF-8">
+        <title>Informar Avistamiento - UOCh</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <nav style="margin-bottom: 15px; text-align: center;">
+                    <a href="Tarea_1.html">Voluntarios</a> | 
+                    <a href="estadisticas.html">Estadísticas</a>
+        </nav>
+        <div class="page-container">
+            <header>
+                <h1>Avistamiento de aves - UOCh</h1>
+                <h3>En esta página usted podrá informar un nuevo avistamiento de aves</h3>
+            </header>
+            <h2>Ingreso de Avistamiento</h2>
+            <form id="form-avistamiento">
+                <div> 
+                    <label for="tipo-ave">Tipo de ave:</label> 
+                    <br>
+                    <select id="tipo-ave">
+                        <option value="">-- Seleccione un Tipo --</option>
+                        <option value="rapaz">Rapaz</option>
+                        <option value="acuatica">Acuatica</option>
+                        <option value="no-voladora">No voladora</option>
+                        <option value="urbana">Urbana</option>
+                        <option value="otra">Otro</option>
+                    </select>
+                    <span class="error" id="error-tipo-ave">Debe seleccionar un tipo de ave.</span>
+                </div> 
+                <div> 
+                    <label for="nombre-ave">Nombre del ave:</label> 
+                    <br>
+                    <input type="text" id="nombre-ave">
+                    <span class="error" id="error-nombre-ave">Debe ingresar el nombre del ave.</span>
+                </div> 
+                <div>
+                    <label for="fecha-hora-avistamiento">Fecha y Hora del avistamiento:</label>
+                    <br>
+                    <input type="datetime-local" id="fecha-hora-avistamiento">
+                    <span class="error" id="error-fecha-hora">Debe seleccionar una fecha y hora válidas.</span>
+                </div>
+                <div> 
+                    <label for="region">Región:</label> 
+                    <br>
+                    <select id="region">
+                        <option value="">-- Seleccione una Región --</option> 
+                        <option value="arica-y-parinacota">Arica y Parinacota</option> 
+                        <option value="tarapaca">Tarapacá</option> 
+                        <option value="antofagasta">Antofagasta</option> 
+                        <option value="atacama">Atacama</option> 
+                        <option value="coquimbo">Coquimbo</option> 
+                        <option value="valparaiso">Valparaíso</option> 
+                        <option value="rm">Metropolitana</option> 
+                        <option value="bernardo-ohiggins">Bernardo O'Higgins</option> 
+                        <option value="maule">Maule</option> 
+                        <option value="nuble">Ñuble</option> 
+                        <option value="biobio">Biobío</option> 
+                        <option value="la-araucania">La Araucanía</option> 
+                        <option value="los-rios">Los Ríos</option> 
+                        <option value="los-lagos">Los Lagos</option> 
+                        <option value="aysen">Aysén</option> 
+                        <option value="magallanes">Magallanes</option> 
+                    </select>
+                    <span class="error" id="error-region">Debe seleccionar una región.</span>
+                </div>
+                <div>
+                    <label for="comuna">Comuna:</label>
+                    <br>
+                    <select id="comuna">
+                        <option value="">-- Seleccione una Comuna --</option>
+                    </select>
+                    <span class="error" id="error-comuna">Debe seleccionar una comuna.</span>
+                </div> 
+
+                <div>
+                    <label for="archivos-avistamiento">Foto o Vídeo del avistamiento (1 a 3 archivos):</label>
+                    <br>
+                    <input type="file" id="archivos-avistamiento" multiple accept="image/*,video/*">
+                    <span class="error" id="error-archivos">Debe adjuntar al menos una foto o vídeo válido (máximo 3).</span>
+                </div>
+                <br>
+                <button id="submit-btn" type="submit">Agregar Avistamiento</button>
+            </form>
+            <hr>
+            <h2> Avistamientos registrados </h2>
+            <div>
+                <label>Filtrar por tipo:</label>
+                <select id="filtro-tipo" onchange="refreshList()">
+                    <option value="">-- Todos --</option>
+                    <option value="rapaz">Rapaz</option>
+                    <option value="acuatica">Acuática</option>
+                    <option value="no-voladora">No voladora</option>
+                    <option value="urbana">Urbana</option>
+                    <option value="otra">Otro</option>
+                </select>
+                <label>Ordenar por:</label>
+                <select id="ordenar-por" onchange="refreshList()">
+                    <option value="fecha">Fecha</option>
+                    <option value="lugar">Lugar (Región)</option>
+                </select>
+            </div>
+            <br>
+            <table border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nombre</th>
+                        <th>Fecha y Hora</th>
+                        <th>Lugar</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-body">
+                    <tr><td colspan="4">No hay datos.</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <div>
+                <button onclick="changePage(-1)">Anterior</button>
+                <span>Página <strong id="num-pagina">1</strong></span>
+                <button onclick="changePage(1)">Siguiente</button>
+            </div>
+        </div>
+        <script src="js/select.js"></script> 
+        <script src="js/avistamiento.js"></script> 
+
+    </body>
+
+</html>
