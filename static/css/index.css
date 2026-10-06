@@ -1,0 +1,76 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 2. Título principal arriba */
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 30px;
+  text-align: center; /* <-- Centra el texto en la pantalla */
+}
+
+/* 3. Área principal centrada en la pantalla */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: none;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+
+
+/* 4. Caja que agrupa y apila los enlaces */
+.box-container {
+  display: flex;
+  flex-direction: column;  /* Apila los enlaces uno debajo del otro */
+  gap: 15px;               /* Distancia pareja entre cada botón */
+  width: 100%;
+  max-width: 320px;        /* Ancho de los rectángulos */
+}
+
+/* 5. Transformar las etiquetas <a> en botones rectangulares */
+.navbar-page {
+  display: block;             /* Hace que tome forma de rectángulo completo */
+  text-decoration: none;      /* Quita el subrayado del enlace */
+  color: #000;                /* Color del texto */
+  background-color: #ffffff;  /* Fondo blanco dentro del rectángulo */
+  border: 2px solid #000;     /* Borde negro marcado */
+  padding: 14px 20px;         /* Espaciado interno para darle grosor */
+  text-align: center;         /* Centra el texto dentro del botón */
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 6px;         /* Esquinas suavemente redondeadas */
+  transition: all 0.2s;       /* Transición suave para el efecto hover */
+}
+
+/* 6. Efecto visual al pasar el cursor sobre la caja */
+.navbar-page:hover {
+  background-color: #000;     /* Cambia el fondo a negro al pasar el mouse */
+  color: #fff;                /* Cambia el texto a blanco */
+}
+
+.side-column {
+  flex: 0 0 280px;
+  max-width: 280px;
+}
+
+.sighting-card img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+}

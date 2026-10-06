@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Avistamiento de aves - UOCh</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+    </head>
+    <body>
+        <h1 class="page-title">Avistamientos de Aves</h1>
+        {% for message in get_flashed_messages() %}
+            <p>{{ message }}</p>
+        {% endfor %}
+        <main class="main-container">
+            <div class="side-column">
+                {% if data|length > 0 %}
+                    <div class="sighting-card">
+                        <h3>{{ data[0].nombre }}</h3>
+                        <p><strong>Tipo:</strong> {{ data[0].tipo }}</p>
+                        <p><strong>Fecha:</strong> {{ data[0].fecha }}</p>
+                        <p><strong>Comuna:</strong> {{ data[0].comuna }}</p>
+                        {% if data[0].path_image %}
+                            <img src="{{ data[0].path_image }}" alt="Foto {{ data[0].nombre }}">
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="box-container">
+                <a class="navbar-page" href="{{ url_for('sightings') }}">Avistamientos</a>
+                <a class="navbar-page" href="{{ url_for('register') }}">Registrar Voluntariado</a>
+                <a class="navbar-page" href="{{ url_for('stats') }}">Estadísticas</a>
+            </div>
+
+            <div class="side-column">
+                {% if data|length > 1 %}
+                    <div class="sighting-card">
+                        <h3>{{ data[1].nombre }}</h3>
+                        <p><strong>Tipo:</strong> {{ data[1].tipo }}</p>
+                        <p><strong>Fecha:</strong> {{ data[1].fecha }}</p>
+                        <p><strong>Comuna:</strong> {{ data[1].comuna }}</p>
+                        {% if data[1].path_image %}
+                            <img src="{{ data[1].path_image }}" alt="Foto {{ data[1].nombre }}">
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </main> 
+    </body>
+</html>

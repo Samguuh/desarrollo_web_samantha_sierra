@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Rellena tu formulario - UOCh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="main-container">
+        <header>
+            <h1>Avistamiento de aves - UOCh</h1>
+            <h3>En esta página usted podrá contribuir con información sobre el avistamiento de aves</h3>
+        </header>
+
+        <h2>Registro de Voluntario(a)</h2>
+
+        {% if error %}
+            <div class="error-message" style="color:red; margin-bottom: 15px;">{{ error }}</div>
+        {% endif %}
+
+        <form id="form-voluntario" method="POST" action="{{ url_for('register') }}">
+            <div> 
+                <label for="nombre-voluntario">Nombre:</label> 
+                <br>
+                <input type="text" id="nombre-voluntario" name="name">
+                <span class="error" id="error-nombre" style="color:red;"> *Debe ingresar un nombre.</span>
+            </div> 
+
+            <div> 
+                <label for="apellidos-voluntario">Apellidos:</label> 
+                <br>
+                <input type="text" id="apellidos-voluntario" name="lastname">
+                <span class="error" id="error-apellido" style="color:red;"> *Debe ingresar un apellido.</span>
+            </div> 
+
+            <div>
+                <label for="email-voluntario">Correo electrónico:</label>
+                <br>
+                <input type="email" id="email-voluntario" name="email" minlength="8">
+                <span class="error" id="error-email" style="color:red;"> *Debe ingresar un e-mail válido.</span>
+            </div>
+
+            <div>
+                <label for="num-voluntario">Número de Teléfono (ej: 9XXXXXXXX):</label>
+                <br>
+                <input type="text" id="num-voluntario" name="cellphone" minlength="9" maxlength="9">
+                <span class="error" id="error-num" style="color:red;"> *Debe ingresar un número telefónico válido.</span>
+            </div>
+
+            <div> 
+                <label for="region">Región:</label> 
+                <br>
+                <select id="region" name="region">
+                    <option value="">-- Seleccione una Región --</option> 
+                    {% for reg in regiones %}
+                        <option value="{{ reg[0] }}">{{ reg[1] }}</option>
+                    {% endfor %}
+                </select>
+                <span class="error" id="error-region" style="color:red;"> *Debe seleccionar una región.</span>
+            </div>
+
+            <div>
+                <label for="comuna">Comuna:</label>
+                <br>
+                <select id="comuna" name="commune">
+                    <option value="">-- Seleccione una Comuna --</option>
+                    {% for reg_id, lista_comunas in comunas_data.items() %}
+                        {% for com in lista_comunas %}
+                            <option value="{{ com.id }}" data-region="{{ reg_id }}">
+                                {{ com.nombre }}
+                            </option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+                <span class="error" id="error-comuna" style="color:red;"> *Debe seleccionar una comuna.</span>
+            </div> 
+
+            <div>
+                <label for="num-postal">Número Postal (Opcional):</label>
+                <br>
+                <input type="text" id="num-postal" name="postalnumber">
+                <span class="error" id="error-postal" style="color:red;"> *Debe ingresar un código postal válido.</span>
+            </div>
+
+            <p><small>Los campos marcados con <span style="color:red">*</span> son obligatorios.</small></p>
+            <br>
+
+            <button id="submit-btn" type="submit">Enviar Formulario</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/formulario.js') }}"></script> 
+    <script src="{{ url_for('static', filename='js/select.js') }}"></script> 
+</body>
+</html>

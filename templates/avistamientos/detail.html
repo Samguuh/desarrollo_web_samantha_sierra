@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Avistamiento - UOCh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <h1>{{ sighting.ave }}</h1>
+        <p><strong>Tipo:</strong> {{ sighting.tipo }}</p>
+        <p><strong>Fecha y hora:</strong> {{ sighting.fecha }}</p>
+        <p><strong>Lugar:</strong> {{ sighting.comuna }}, {{ sighting.region }}</p>
+        <p><strong>Voluntario:</strong> {{ sighting.voluntario }}</p>
+        {% for f in files %}
+            {% if f.ruta_archivo.rsplit('.', 1)[-1] in ['mp4', 'webm', 'mov'] %}
+                <video controls style="max-width:100%" src="{{ url_for('static', filename='uploads/' ~ f.ruta_archivo) }}"></video>
+            {% else %}
+                <img style="max-width:100%" src="{{ url_for('static', filename='uploads/' ~ f.ruta_archivo) }}" alt="{{ f.nombre_archivo }}">
+            {% endif %}
+        {% endfor %}
+        <p><a href="{{ url_for('sighting') }}">Volver a avistamientos</a> | <a href="{{ url_for('index') }}">Inicio</a></p>
+    </div>
+</body>
+</html>

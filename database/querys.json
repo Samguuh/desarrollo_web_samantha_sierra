@@ -1,0 +1,14 @@
+{
+  "create_volunteer": "INSERT INTO voluntario (nombre, email, telefono, fecha_registro, comuna_id) VALUES (%s, %s, %s, NOW(), %s)",
+  "create_registro": "INSERT INTO registro (ruta_archivo, nombre_archivo, avistamiento_id) VALUES (%s, %s, %s)",
+  "get_user_by_email": "SELECT id, nombre, email FROM voluntario WHERE email = %s",
+  "get_region": "SELECT id, nombre FROM region",
+  "get_commune_grouped_by_region": "SELECT id, nombre, region_id FROM comuna",
+  "create_sighting": "INSERT INTO avistamiento (voluntario_id, ave_id, fecha_hora, lugar, descripcion) VALUES (%s, %s, %s, %s, %s)",
+  "get_birds": "SELECT id, nombre FROM ave ORDER BY nombre ASC",
+  "get_voluntarios": "SELECT id, nombre FROM voluntario ORDER BY nombre ASC",
+  "get_sightings": "SELECT a.id, a.descripcion AS tipo, e.nombre AS nombre, a.fecha_hora AS fecha, CONCAT(c.nombre, ', ', g.nombre) AS lugar FROM avistamiento a JOIN ave e ON e.id = a.ave_id JOIN comuna c ON c.id = a.lugar JOIN region g ON g.id = c.region_id WHERE (%s = '' OR a.descripcion = %s) ORDER BY CASE WHEN %s = 'lugar' THEN g.nombre END, a.fecha_hora DESC LIMIT 6 OFFSET %s",
+  "get_sighting_by_id": "SELECT a.id, e.nombre AS ave, a.descripcion AS tipo, a.fecha_hora AS fecha, c.nombre AS comuna, g.nombre AS region, v.nombre AS voluntario FROM avistamiento a JOIN ave e ON e.id = a.ave_id JOIN comuna c ON c.id = a.lugar JOIN region g ON g.id = c.region_id JOIN voluntario v ON v.id = a.voluntario_id WHERE a.id = %s",
+  "get_sighting_files": "SELECT ruta_archivo, nombre_archivo FROM registro WHERE avistamiento_id = %s",
+  "get_last_sightings": "SELECT e.nombre AS nombre, a.descripcion AS tipo, a.fecha_hora AS fecha, c.nombre AS comuna, (SELECT CONCAT('/static/uploads/', r.ruta_archivo) FROM registro r WHERE r.avistamiento_id = a.id LIMIT 1) AS path_image FROM avistamiento a JOIN ave e ON e.id = a.ave_id JOIN comuna c ON c.id = a.lugar ORDER BY a.id DESC LIMIT 2"
+}
