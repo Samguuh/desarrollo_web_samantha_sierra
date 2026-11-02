@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #2e5e4e;
+  padding: 10px 24px;
+  margin-bottom: 20px;
+}
+ 
+.navbar h1 {
+  margin: 0;
+  margin-right: auto;
+  font-family: "Fira Code", monospace;
+  font-size: 22px;
+  color: #ffffff;
+}
+ 
+.navbar .navbar-page {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+ 
+.navbar .navbar-page:hover {
+  background-color: #3f7d68;
+}

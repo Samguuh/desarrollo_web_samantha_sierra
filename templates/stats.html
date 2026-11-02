@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas y Métricas - UOCh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="main-container">
+        <header>
+            <h1>Avistamiento de aves - UOCh</h1>
+            <h3>Indicadores y Métricas del Sistema</h3>
+        </header>
+
+        <hr>
+
+        <h2>1. Avistamientos por día</h2>
+        <figure class="highcharts-figure">
+        <div id="container"></div>
+    </figure>
+    <h2>2. Avistamientos por tipo de ave</h2>
+        <figure class="highcharts-figure">
+            <div id="pie-container"></div>
+        </figure>
+    <h2>3. Cantidad de voluntarios por comuna</h2>
+        <figure class="highcharts-figure">
+            <div id="barr-container"></div>
+        </figure>
+        
+    </div>
+    {% block javascript %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{{ url_for('static', filename='js/stats.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stats_sighting.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stats_volunteers.js') }}"></script>
+    {% endblock %}
+</body>
+</html>

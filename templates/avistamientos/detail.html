@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Avistamiento - UOCh</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="main-container">
+        <h1>{{ sighting.ave }}</h1>
+        <p><strong>Tipo:</strong> {{ sighting.tipo }}</p>
+        <p><strong>Fecha y hora:</strong> {{ sighting.fecha }}</p>
+        <p><strong>Lugar:</strong> {{ sighting.comuna }}, {{ sighting.region }}</p>
+        <p><strong>Voluntario:</strong> {{ sighting.voluntario }}</p>
+        {% for f in files %}
+            {% if f.ruta_archivo.rsplit('.', 1)[-1] in ['mp4', 'webm', 'mov'] %}
+                <video controls style="max-width:100%" src="{{ url_for('static', filename='uploads/' ~ f.ruta_archivo) }}"></video>
+            {% else %}
+                <img style="max-width:100%" src="{{ url_for('static', filename='uploads/' ~ f.ruta_archivo) }}" alt="{{ f.nombre_archivo }}">
+            {% endif %}
+        {% endfor %}
+        <form id="form-comentario" method="POST" action="{{ url_for('sighting_detail', sighting_id=sighting.id) }}">
+            <div> 
+                <label for="nombre_comentarista">Nombre:</label> 
+                <br>
+                <input type="text" id="nombre-comentarista" name="name">
+                <span class="error" id="error-nombre-comentario" style="color:red;"> *El nombre debe tener entre 3 y 50 caracteres.</span>
+            </div> 
+            <div> 
+                <label for="contenido">Agrega un comentario:</label> 
+                <br>
+                <input type="text" id="comentario" name="comment">
+                <span class="error" id="error-comentario" style="color:red;"> *El comentario debe tener entre 5 y 300 caracteres.</span>
+            </div>
+            <button id="submit-btn" type="submit">Enviar Comentario</button>
+        </form>
+        {% for c in comments %}
+            <div class="comment">
+                <p><strong>{{ c.nombre }}</strong> <small>{{ c.fecha }}</small></p>
+                <p>{{ c.texto }}</p>
+            </div>
+        {% else %}
+            <p>Aún no hay comentarios.</p>
+        {% endfor %}
+        <div class="detail-links">
+            <a class="btn-link" href="{{ url_for('sighting') }}">← Volver a avistamientos</a>
+            <a class="btn-link btn-secondary" href="{{ url_for('index') }}">Inicio</a>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/comments.js') }}"></script>
+</body>
+</html>
